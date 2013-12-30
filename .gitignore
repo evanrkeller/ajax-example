@@ -1,0 +1,14 @@
+*~
+.DS_Store
+.bundle
+.env
+.ruby-version
+.ruby-gemset
+Procfile
+config/database.yml
+log/*.log
+*.dat
+*.swo
+*.swp
+tmp/
+tags
