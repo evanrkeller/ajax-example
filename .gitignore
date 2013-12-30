@@ -10,5 +10,6 @@ log/*.log
 *.dat
 *.swo
 *.swp
+db/
 tmp/
 tags
