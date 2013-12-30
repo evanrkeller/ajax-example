@@ -5,6 +5,12 @@
   <input type="submit">
 </form>
 
+<ul id="preselected">
+  <li><a href="observations?q=Atlanta,%20GA" data-remote="true" data-type="json">Atlanta</a></li>
+  <li><a href="observations?q=New%20York,%20NY" data-remote="true" data-type="json">NYC</a></li>
+  <li><a href="observations?q=Seattle,%20WA" data-remote="true" data-type="json">Seattle</a></li>
+</ul>
+
 <dl>
   <dt>Location:</dt>
   <dd id="location"><%= @observation["name"] %></dd>
@@ -14,13 +20,12 @@
 
 <script>
   $('<%= image_tag 'ajax-loader.gif', id: 'spinner' %>').css('position','absolute').hide().appendTo('body');
-  $('#observation_form').on('ajax:success', function(e, data) {
+  $('#observation_form, #preselected a').on('ajax:success', function(e, data) {
     $('#location').html(data.name);
     $('#temp').html(data.main.temp);
     $('#spinner').fadeOut();
   })
-  $('#observation_form').on('submit', function() {
-    console.log('spinner');
+  $('#observation_form ').on('submit', function() {
     $('#spinner').fadeIn();
   })
 </script>
