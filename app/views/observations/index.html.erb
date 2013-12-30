@@ -1,13 +1,20 @@
 <h1>Observations</h1>
 
-<form action="observations">
+<%= form_tag 'observations', method: :get, id: 'observation_form', remote: true, "data-type"=>"json" =%>
   <input type="text" name="q" value="<%= params['q'] %>">
   <input type="submit">
 </form>
 
 <dl>
   <dt>Location:</dt>
-  <dd><%= @observation["name"] %></dd>
+  <dd id="location"><%= @observation["name"] %></dd>
   <dt>Current Temp:</dt>
-  <dd><%= @observation["main"]["temp"] %></dd>
+  <dd id="temp"><%= @observation["main"]["temp"] %></dd>
 </dl>
+
+<script>
+  $('#observation_form').on('ajax:success', function(e, data) {
+    $('#location').html(data.name);
+    $('#temp').html(data.main.temp);
+  })
+</script>
