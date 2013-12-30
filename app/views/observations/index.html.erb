@@ -13,8 +13,14 @@
 </dl>
 
 <script>
+  $('<%= image_tag 'ajax-loader.gif', id: 'spinner' %>').css('position','absolute').hide().appendTo('body');
   $('#observation_form').on('ajax:success', function(e, data) {
     $('#location').html(data.name);
     $('#temp').html(data.main.temp);
+    $('#spinner').fadeOut();
+  })
+  $('#observation_form').on('submit', function() {
+    console.log('spinner');
+    $('#spinner').fadeIn();
   })
 </script>
