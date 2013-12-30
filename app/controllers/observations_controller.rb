@@ -4,7 +4,7 @@ class ObservationsController < ApplicationController
   require 'json'
 
   def index
-    @observation =  JSON.parse(open("http://api.openweathermap.org/data/2.5/weather?q=Birmingham,%20AL").read)
+    @observation =  JSON.parse(open("http://api.openweathermap.org/data/2.5/weather?q=#{URI::encode params[:q]}").read)
     respond_to do |format|
       format.html
       format.json { render json: @observation }

@@ -1,5 +1,10 @@
 <h1>Observations</h1>
 
+<form action="observations">
+  <input type="text" name="q" value="<%= params['q'] %>">
+  <input type="submit">
+</form>
+
 <dl>
   <dt>Location:</dt>
   <dd><%= @observation["name"] %></dd>
