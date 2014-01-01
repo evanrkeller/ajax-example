@@ -34,9 +34,12 @@
 <script>
   $('<%= image_tag 'ajax-loader.gif', id: 'spinner' %>').css('position','absolute').hide().appendTo('body');
   $('#preselected a').on('ajax:success', function(e, data) {
-    $('#location').html(data.name);
-    $('#temp').html(data.main.temp);
-    $('#spinner').fadeOut();
+    $('#headlines-table tbody').empty();
+    for (index in data.headlines) {
+      $('#headlines-table tbody').append('<tr id="headline' + index + '"><td class="headline"></td><td class="source"></td></tr>')
+      $('#headline' + index + ' .headline').html(data.headlines[index].headline)
+      $('#headline' + index + ' .source').html(data.headlines[index].source)
+    }
   })
   $('#observation_form ').on('submit', function() {
     $('#spinner').fadeIn();
