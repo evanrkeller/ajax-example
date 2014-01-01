@@ -1,26 +1,39 @@
 <h1>Observations</h1>
 
-<%= form_tag 'observations', method: :get, id: 'observation_form', remote: true, "data-type"=>"json" =%>
-  <input type="text" name="q" value="<%= params['q'] %>">
-  <input type="submit">
-</form>
 
 <ul id="preselected">
-  <li><a href="observations?q=Atlanta,%20GA" data-remote="true" data-type="json">Atlanta</a></li>
-  <li><a href="observations?q=New%20York,%20NY" data-remote="true" data-type="json">NYC</a></li>
-  <li><a href="observations?q=Seattle,%20WA" data-remote="true" data-type="json">Seattle</a></li>
+  <li><a href="observations?q=nba" data-remote="true" data-type="json">NBA</a></li>
+  <li><a href="observations?q=wnba" data-remote="true" data-type="json">Women's NBA</a></li>
+  <li><a href="observations?q=mens-college-basketball" data-remote="true" data-type="json">Men's College</a></li>
 </ul>
 
-<dl>
-  <dt>Location:</dt>
-  <dd id="location"><%= @observation["name"] %></dd>
-  <dt>Current Temp:</dt>
-  <dd id="temp"><%= @observation["main"]["temp"] %></dd>
-</dl>
+<!--  I'll put static content in the table body just as an example.  It's
+      taken directly from the example output on the ESPN API page  -->
+
+<table id="headlines-table">
+  <thead>
+    <tr>
+      <th>Headline</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+      <tr>
+        <td>Lakers edge Nets as Mike D'Antoni makes debut on L.A. bench</td>
+        <td>Associated Press</td>
+      </tr>
+      <tr>
+        <td>Carmelo Anthony scores 29 points as Knicks blow out Hornets</td>
+        <td>Associated Press</td>
+      </tr>
+      
+  </tbody>
+</table>
 
 <script>
   $('<%= image_tag 'ajax-loader.gif', id: 'spinner' %>').css('position','absolute').hide().appendTo('body');
-  $('#observation_form, #preselected a').on('ajax:success', function(e, data) {
+  $('#preselected a').on('ajax:success', function(e, data) {
     $('#location').html(data.name);
     $('#temp').html(data.main.temp);
     $('#spinner').fadeOut();
